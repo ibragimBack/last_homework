@@ -1,30 +1,16 @@
 from aiogram import Router,types, F
 from aiogram.filters import Command
 
-choice_router = Router()
+from keyboards.choose_genre_kb import choose_genre_kb
 
-@choice_router.message(Command('choice'))
+choose_genre_router = Router()
+
+@choose_genre_router.message(Command('choose_genre'))
 async def chosen(message: types.Message):
-    kb = types.ReplyKeyboardMarkup(
-        keyboard=[
-            [
-                types.KeyboardButton(text='Боевик'),
-                types.KeyboardButton(text='Комедия')
-            ],
-            [
-                types.KeyboardButton(text='Романтика'),
-                types.KeyboardButton(text='Мистика')
-            ],
-            [
-                types.KeyboardButton(text='Фэнтези'),
-                types.KeyboardButton(text='Приключения')
-            ]
-        ]
-    )
-    await message.answer(f'{message.from_user.first_name} выберите жанр', reply_markup=kb)
+    await message.answer(f'{message.from_user.first_name} выберите жанр', reply_markup=choose_genre_kb())
 
 
-@choice_router.message(F.text.lower() == 'боевик')
+@choose_genre_router.message(F.text.lower() == 'боевик')
 async def information(message: types.Message):
     await message.answer('''
     Боевик — жанр, в котором основное предпочтение отдается погоням, экшену, а не 
@@ -33,7 +19,7 @@ async def information(message: types.Message):
     сильнее зла.''')
 
 
-@choice_router.message(F.text.lower() == 'романтика')
+@choose_genre_router.message(F.text.lower() == 'романтика')
 async def information(message: types.Message):
     await message.answer('''
     Романти́ческий фильм — кинематографический жанр, который сосредоточен на страсти, 
@@ -41,7 +27,7 @@ async def information(message: types.Message):
     может проходить через свидания, ухаживания и брак.''')
 
 
-@choice_router.message(F.text.lower() == 'комедия')
+@choose_genre_router.message(F.text.lower() == 'комедия')
 async def information(message: types.Message):
     await message.answer('''
     Комедия - жанр художественного произведения, характеризующийся юмористическим или
@@ -49,7 +35,7 @@ async def information(message: types.Message):
     момент действенного конфликта или борьбы.''')
 
 
-@choice_router.message(F.text.lower() == 'приключения')
+@choose_genre_router.message(F.text.lower() == 'приключения')
 async def information(message: types.Message):
     await message.answer('''
     Приключе́ние — захватывающее происшествие, неожиданное событие или случай в жизни, 
@@ -57,7 +43,7 @@ async def information(message: types.Message):
     волнующее похождение, интересное испытание, возбуждающий переворот или любовная авантюра.''')
 
 
-@choice_router.message(F.text.lower() == 'фэнтези')
+@choose_genre_router.message(F.text.lower() == 'фэнтези')
 async def information(message: types.Message):
     await message.answer('''
     Фэнтези — фантастический жанр, который использует мифологические и фольклорные, а также
@@ -65,7 +51,7 @@ async def information(message: types.Message):
     британских авторов, в первую очередь, под влиянием Дж. Р. Р.''')
 
 
-@choice_router.message(F.text.lower() == 'мистика')
+@choose_genre_router.message(F.text.lower() == 'мистика')
 async def information(message: types.Message):
     await message.answer('''
     Мистический фильм или мистика — кинематографический жанр, часто включающий в себя элементы

@@ -1,4 +1,5 @@
 from.start import start_router
 from.myinfo import myinfo_router
 from.random_pic import rp_router
-from.choice import choice_router
+from.choose_genre import choose_genre_router
+from.movie_poll import movie_poll_router
