@@ -1,12 +1,19 @@
 import asyncio
-from bot import bot,dp,set_commands
+from aiogram import Bot
+import logging
+from bot import bot,dp,db,set_commands
 from handlers import (
     start_router,
     myinfo_router,
     rp_router,
     choose_genre_router,
-    movie_poll_router
+    movie_poll_router,
+    db_films_router
 )
+
+async def on_startup(bot: Bot):
+    db.create_tables()
+    db.populate_tables()
 
 
 async def main():
@@ -17,8 +24,10 @@ async def main():
     dp.include_router(rp_router)
     dp.include_router(choose_genre_router)
     dp.include_router(movie_poll_router)
+    dp.include_router(db_films_router)
 
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
+    logging.basicConfig(level=logging.INFO)
     asyncio.run(main())
