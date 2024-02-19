@@ -12,7 +12,7 @@ def choose_genre_kb():
                 KeyboardButton(text='Мистика')
             ],
             [
-                KeyboardButton(text='Фэнтези'),
+                KeyboardButton(text='Фантастика'),
                 KeyboardButton(text='Приключения')
             ]
         ]

@@ -1,5 +1,6 @@
 from aiogram import Router,types, F
 from aiogram.filters import Command
+from bot import db
 
 from keyboards.choose_genre_kb import choose_genre_kb
 
@@ -12,48 +13,41 @@ async def chosen(message: types.Message):
 
 @choose_genre_router.message(F.text.lower() == 'боевик')
 async def information(message: types.Message):
-    await message.answer('''
-    Боевик — жанр, в котором основное предпочтение отдается погоням, экшену, а не 
-    сюжету. Как правило, в фильмах этого жанра есть один положительный герой и много 
-    отрицательных. Часто изображается борьба добра со злом и часто добро оказывается  
-    сильнее зла.''')
+    genres = db.get_films_by_genre_name('Боевик')
+    for genre in genres:
+        await message.answer(f'Name: {genre[0]}\nDescription: {genre[1]}\nRating: {genre[2]}\nImage: {genre[3]}')
 
 
 @choose_genre_router.message(F.text.lower() == 'романтика')
 async def information(message: types.Message):
-    await message.answer('''
-    Романти́ческий фильм — кинематографический жанр, который сосредоточен на страсти, 
-    эмоциях и романтических переживаниях главных героев и истории их любви, которая 
-    может проходить через свидания, ухаживания и брак.''')
+    genres = db.get_films_by_genre_name('Романтика')
+    for genre in genres:
+        await message.answer(f'Name: {genre[0]}\nDescription: {genre[1]}\nRating: {genre[2]}\nImage: {genre[3]}')
 
 
 @choose_genre_router.message(F.text.lower() == 'комедия')
 async def information(message: types.Message):
-    await message.answer('''
-    Комедия - жанр художественного произведения, характеризующийся юмористическим или
-    сатирическим подходами, и также вид драмы, в котором специфически разрешается 
-    момент действенного конфликта или борьбы.''')
+    genres = db.get_films_by_genre_name('Комедия')
+    for genre in genres:
+        await message.answer(f'Name: {genre[0]}\nDescription: {genre[1]}\nRating: {genre[2]}\nImage: {genre[3]}')
 
 
 @choose_genre_router.message(F.text.lower() == 'приключения')
 async def information(message: types.Message):
-    await message.answer('''
-    Приключе́ние — захватывающее происшествие, неожиданное событие или случай в жизни, 
-    цепь нечаянных событий и непредвиденных случаев; нежданная быль, замечательное свершение,
-    волнующее похождение, интересное испытание, возбуждающий переворот или любовная авантюра.''')
+    genres = db.get_films_by_genre_name('Приключения')
+    for genre in genres:
+        await message.answer(f'Name: {genre[0]}\nDescription: {genre[1]}\nRating: {genre[2]}\nImage: {genre[3]}')
 
 
-@choose_genre_router.message(F.text.lower() == 'фэнтези')
+@choose_genre_router.message(F.text.lower() == 'фантастика')
 async def information(message: types.Message):
-    await message.answer('''
-    Фэнтези — фантастический жанр, который использует мифологические и фольклорные, а также
-    сказочные мотивы в повествовании. В связи с тем, что жанр фэнтези формировался под влиянием
-    британских авторов, в первую очередь, под влиянием Дж. Р. Р.''')
+    genres = db.get_films_by_genre_name('Фантастика')
+    for genre in genres:
+        await message.answer(f'Name: {genre[0]}\nDescription: {genre[1]}\nRating: {genre[2]}\nImage: {genre[3]}')
 
 
 @choose_genre_router.message(F.text.lower() == 'мистика')
 async def information(message: types.Message):
-    await message.answer('''
-    Мистический фильм или мистика — кинематографический жанр, часто включающий в себя элементы
-    фантастики и фэнтези. В основе сюжетов мистических фильмов лежит взаимодействие персонажей
-    из реального мира с миром потусторонних сил и явлений.''')
+    genres = db.get_films_by_genre_name('Мистика')
+    for genre in genres:
+        await message.answer(f'Name: {genre[0]}\nDescription: {genre[1]}\nRating: {genre[2]}\nImage: {genre[3]}')
