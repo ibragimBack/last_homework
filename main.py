@@ -9,7 +9,8 @@ from handlers import (
     choose_genre_router,
     movie_poll_router,
     db_films_router,
-    remind_router
+    remind_router,
+    parsing_router
 )
 
 async def on_startup(bot: Bot):
@@ -27,6 +28,7 @@ async def main():
     dp.include_router(movie_poll_router)
     dp.include_router(db_films_router)
     dp.include_router(remind_router)
+    dp.include_router(parsing_router)
 
     scheduler.start()
 
